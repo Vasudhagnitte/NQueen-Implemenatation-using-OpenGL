@@ -22,4 +22,4 @@ https://youtu.be/VMsTI_CC-jc.
 6)Incase u cannot place the queen(Diagonal,vertical or horizontal)it will play a default system music,indicating that a queen cannot be placed.
 
 
-Screenshots:-
+**Screenshots:-**
