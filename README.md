@@ -11,4 +11,4 @@ https://youtu.be/VMsTI_CC-jc.
 5)Use mouse right button to remove the queen.
 6)Incase u cannot place the queen(Diagonal,vertical or horizontal)it will play a default system music,indicating that a queen cannot be placed.
 
-![Uploading Screenshot (44).png…]()
+Screenshots:-
