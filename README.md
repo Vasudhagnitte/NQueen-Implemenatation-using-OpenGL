@@ -23,3 +23,19 @@ https://youtu.be/VMsTI_CC-jc.
 
 
 ****Screenshots:-****
+![Screenshot (44)](https://github.com/Vasudhagnitte/NQueen-Implemenatation-using-OpenGL/assets/100714297/2d42e398-49e4-446c-b5f4-ddf4a3f820a1)
+Create a glut project after installing glut in codeblocks.
+
+
+![Screenshot (45)](https://github.com/Vasudhagnitte/NQueen-Implemenatation-using-OpenGL/assets/100714297/eb23bb45-f306-475b-b104-118369453626)
+Declare the size of queen at runtime(Better to keep 4 or 5)
+
+![Screenshot (46)](https://github.com/Vasudhagnitte/NQueen-Implemenatation-using-OpenGL/assets/100714297/35608021-0d9d-4c1f-87c9-ea9722103bdf)
+First page,includes the details of our project.
+
+
+![Screenshot (47)](https://github.com/Vasudhagnitte/NQueen-Implemenatation-using-OpenGL/assets/100714297/f3f36284-dc50-401b-a8ae-f5f66651768b)
+Output of NQueen Implementation
+
+
+
