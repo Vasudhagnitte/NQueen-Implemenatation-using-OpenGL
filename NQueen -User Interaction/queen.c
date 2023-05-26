@@ -1,5 +1,3 @@
-//NQueen Implementation with user interaction
-
 #include <Windows.h>
 #include<mmsystem.h>
 #include<stdio.h>
@@ -10,7 +8,7 @@
 char chessboard[222][222] = {};
 int queens;
 int queenShape=0;
-int  viewPage=1;
+int  viewPage=0;
 void display();
 float W; float H;
 int currentstate=0;
@@ -35,8 +33,6 @@ bool checking(int row, int column) {
 		}
 	}
 	return true;
-
-
 }
 void removeflag(int row)
 {
@@ -48,7 +44,6 @@ void removeflag(int row)
 }
 void backtracking(void)
 {
-
 	for (int row = 0; row < queens; row++)
 	{
 		for (int column = 0; column <queens; column++) {
@@ -57,64 +52,45 @@ void backtracking(void)
 				savingposition[row][0] = row;
 				savingposition[row][1] = column;
 				row++; column = -1;
-				if (row == queens)
-
-                    break;
+				if (row == queens) break;
 			}
 			else if (column == queens - 1 && chessboard[row][column] != 'Q')
 			{
-
 			    PlaySound("stack_empty.wav", NULL, SND_FILENAME | SND_ASYNC);
-
 
 
 				row--;
 				column = savingposition[row][1];
-
+				//cout << row << " " << column << endl;
 				chessboard[row][column] = '-';
 
 				column = 0;
 			}
 		}
 	}
-
 }
 void displaytable(void)
 {
 	for (int i = 0; i< queens; i++) {
 		for (int j = 0; j < queens; j++) {
 			if (chessboard[i][j] != 'Q')
-				printf("*");//cout << '.';
+				printf(".");//cout << '.';
 
 			else
 				printf("%c",chessboard[i][j]);//cout << chessboard[i][j];
 		}
-		printf("\n");
+		printf("\n");;
 	}
 }
 void keyboard(unsigned char key, int x, int y)
 {
     switch (key) {
-        case '1':
-            queenShape = 1; // set queen shape to sphere
+
+
+        case '\r': // Enter key
+            currentstate = 1; // switch to chessboard display
             glutPostRedisplay();
             break;
-        case '2':
-            queenShape = 2; // set queen shape to triangle
-            break;
-
-        case 'v':
-            currentstate=1;
-            break;
-
-        case '\r':
-		 	currentstate=2;
-		   glutPostRedisplay();
-		    break;
-
-
-
-
 
 
 }
@@ -136,19 +112,11 @@ void displayboard()
              if (chessboard[i][j] == 'Q') {
                 glPushMatrix();
                 // user's choice of queen shape
-                if (queenShape == 1) {
+
                     // Draw a sphere for the queen
                     glColor3f(0, 1, 0);
                     glutSolidSphere(0.4, 150, 150);
-                } else if (queenShape == 2) {
-                    // Draw a trianngle for the queen
-                    glBegin(GL_TRIANGLES);
-                    glColor3f(1, 1, 0);
-                    glVertex2f(0.1, 0.4);
-                    glVertex2f(0.4, -0.4);
-                    glVertex2f(-0.4, -0.4);
-                    glEnd();
-                }
+
                 glPopMatrix();
             }
 
@@ -238,101 +206,21 @@ void display()
             glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, vasu[i]);
         }
 
-        glColor3f(1.0, 0.0, .0);
+        glColor3f(1.0, 1.0, 1.0);
         glRasterPos2f(150.0, 150.0);
-        char message[] = "Press 'V' to begin!";
+        char message[] = "Press Enter to begin!";
         for (int i = 0; i < strlen(message); i++) {
             glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, message[i]);
         }
-    }
-    else if(currentstate==1 )
-    {
-        glClear(GL_COLOR_BUFFER_BIT);
-         glColor3f(0.0, 0.0, 1.0);
-        glRasterPos2f(200.0, 700.0);
-        char a[] = "Welcome to N-Queen's Visualisation";
-        for (int i = 0; i < strlen(a); i++) {
-            glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, a[i]);
-        }
-
-         glColor3f(1.0, 1.0, 0.0);
-        glRasterPos2f(0.0, 670.0);
-        char ab[] = "*This wont show any results for N=1";
-        for (int i = 0; i < strlen(ab); i++) {
-            glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, ab[i]);
-        }
-        glColor3f(1.0, 1.0, 0.0);
-        glRasterPos2f(0.0, 650.0);
-        char abc[] = "*Solutions doesn't exist for n = 2 and n = 3";
-        for (int i = 0; i < strlen(abc); i++) {
-            glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, abc[i]);
-        }
-         glColor3f(1.0, 0.0, 0.0);
-        glRasterPos2f(0.0, 620.0);
-        char abcd[] = "*Rules to Play the Game";
-        for (int i = 0; i < strlen(abcd); i++) {
-            glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, abcd[i]);
-        }
-         glColor3f(1.0, 0.0, 1.0);
-        glRasterPos2f(0.0, 600.0);
-        char abcde[] = "**Player can change the shape of Queen using Key 1 & 2";
-        for (int i = 0; i < strlen(abcde); i++) {
-            glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, abcde[i]);
-        }
-         glColor3f(0.0, 0.0, 1.0);
-        glRasterPos2f(0.0, 580.0);
-        char ba[] = "1--->Green Sphere";
-        for (int i = 0; i < strlen(ba); i++) {
-            glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, ba[i]);
-        }
-        glColor3f(0.0, 0.0, 1.0);
-        glRasterPos2f(0.0, 560.0);
-        char bac[] = "2--->Yellow Triangle";
-        for (int i = 0; i < strlen(bac); i++) {
-            glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, bac[i]);
-        }
-         glColor3f(1.0, 0.0, 1.0);
-        glRasterPos2f(0.0, 540.0);
-        char bacc[] = "**If Queen can't be placed,it beeps!!";
-        for (int i = 0; i < strlen(bacc); i++) {
-            glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, bacc[i]);
-        }
-        glColor3f(1.0, 0.0, 1.0);
-        glRasterPos2f(0.0, 520.0);
-        char baccs[] = "**Use Mouse Left Click to draw the Queen";
-        for (int i = 0; i < strlen(baccs); i++) {
-            glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, baccs[i]);
-        }
-        glColor3f(1.0, 0.0, 1.0);
-        glRasterPos2f(0.0, 500.0);
-        char baccss[] = "**Use Mouse Right Click to delete the Queen";
-        for (int i = 0; i < strlen(baccss); i++) {
-            glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, baccss[i]);
-        }
-         glColor3f(0.0, 1.0, 0.0);
-        glRasterPos2f(0.0, 200.0);
-        char baccsss[] = "****************************************************HAPPY PLAYING************************************************************";
-        for (int i = 0; i < strlen(baccsss); i++) {
-            glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, baccsss[i]);
-        }
-         glColor3f(0.0, 1.0, 0.0);
-        glRasterPos2f(150.0, 350.0);
-        char bv[] = "=======PRESS 'ENTER' TO CONTINUE======";
-        for (int i = 0; i < strlen(bv); i++) {
-            glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, bv[i]);
-        }
 
 
-    }
 
-else {
+        }else {
         // Draw the chessboard and queen placement as usual
         glPushMatrix();
         displayboard();
         glPopMatrix();
         displaytable();
-
-
     }
 
     glutSwapBuffers();
@@ -377,7 +265,6 @@ void mouse(int button, int state, int x, int y) //mouse function...
 			row = (y / 150);
 			column = (x / 150);
 			chessboard[row][column] = ' ';
-
 		}
 
 		glutPostRedisplay();
@@ -395,7 +282,7 @@ int main(int argc, char ** argv)
     scanf("%d",&queens);
     printf("Queen's Shape changes according to the user's wish\n");
     printf("Press 1 for Queen Shape to be sphere\n Press 2 for Queen Shape to be Triangle");
-    W = 150 * queens;
+W = 150 * queens;
 	H = 150 * queens;
     glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
@@ -411,5 +298,3 @@ int main(int argc, char ** argv)
 	glutMainLoop();
 	return 0;
 }
-
-
